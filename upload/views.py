@@ -11,6 +11,7 @@ import pyrebase
 import os
 from datetime import datetime
 import random
+from .dfuc import dfuc
 
 
 config = {
@@ -41,17 +42,24 @@ def image_request(request):
             #pushing image to cloud storage from local
             sto = storage.child('img_'+str(a)).put(img_object.image)
 
+            # getting probability values
+
             
             img_url = storage.child('img_'+str(a)).get_url(sto['downloadTokens'])
 
             dt = datetime.now().strftime("%Y-%M-%D %H:%M:%S")
 
+
+
             # making dictionary of data
-            data['img'] = img_url 
-            data['c1'] = str(0.2)
-            data['c2'] = str(0.3)
-            data['c3'] = str(0.2)
-            data['c4'] = str(0.3)
+            data['img'] = img_url
+
+
+            vals = dfuc(img_object.image)
+            data['c1'] = vals[0]
+            data['c2'] = vals[1]
+            data['c3'] = vals[2]
+            data['c4'] = vals[3]
             data['date'] = dt
 
             # pushing data to realtime

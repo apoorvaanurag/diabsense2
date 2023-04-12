@@ -6,12 +6,20 @@
         {{ form.as_p }}  
         <button type="submit">Upload</button>  
     </form>  
-  
-    {% if img_obj %}  
-        <h3>Succesfully uploaded! </h3>
-        <!-- {{img_obj.created_at}} -->
-        <!-- <img src="img_obj" alt="Image"> -->
-        
-    {% endif %}  
+    
+
+
+    <!-- reset the web page on hitting refresh -->
+    {% if up %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+        <script>
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+            }
+        </script>
+    {% endif %}
+
   
 {% endblock%}

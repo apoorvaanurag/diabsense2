@@ -30,6 +30,9 @@ db = firebase.database()
 storage = firebase.storage()
 
 data = {}
+uploaded = False
+
+
 
 def image_request(request):
     if request.method == "POST":
@@ -74,14 +77,19 @@ def image_request(request):
 
             # close the file path
             messages.success(request, "File upload in Firebase Storage successful")
+            uploaded = True
 
             return render(
-                request, "image_form.html", {"form": form, "img_obj": img_object}
+                request, "image_form.html", {"form": form, "img_obj": img_object, "up":uploaded}
             )
     else:
         form = UserImage()
 
     return render(request, "image_form.html", {"form": form})
+
+def results(request):
+    
+    return render(request, "results.html")
 
 
 

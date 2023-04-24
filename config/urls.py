@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [path("admin/", admin.site.urls),
- path("", include(("upload.urls"))),
- path("results", include(("results.urls")))]
+ path("", include(("upload.urls"))),# home page
+ path("results", include(("results.urls")))] # results page
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

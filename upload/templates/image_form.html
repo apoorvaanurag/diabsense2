@@ -10,16 +10,16 @@
 
 
     <!-- reset the web page on hitting refresh -->
-    {% if up %}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-        <script>
-            if ( window.history.replaceState ) {
-                window.history.replaceState( null, null, window.location.href );
-            }
-        </script>
-    {% endif %}
+    
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    <script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
+    
 
   
 {% endblock%}

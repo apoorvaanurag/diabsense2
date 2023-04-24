@@ -12,7 +12,9 @@ import os
 from datetime import datetime
 import random
 from .dfuc import dfuc
-
+from django.core.validators import validate_image_file_extension
+from .footValid import footValid
+# declare vals variable to use in results\views.py
 
 config = {
     "apiKey": "AIzaSyDC2DsvGtSfGsLyavQdvpW7oi4BfXtm2RY",
@@ -32,15 +34,15 @@ storage = firebase.storage()
 data = {}
 uploaded = False
 
-
-
 def image_request(request):
     if request.method == "POST":
         form = UserImage(request.POST, request.FILES)
-        if form.is_valid():
+        img_object = form.instance
+        
+        if form.is_valid() and footValid(img_object.image):
 
-            form.save()
-            img_object = form.instance
+            #removing since redundant copies in sqlite
+            # form.save()
             a = random.randint(0, 10000)
             #pushing image to cloud storage from local
             sto = storage.child('img_'+str(a)).put(img_object.image)
@@ -50,6 +52,7 @@ def image_request(request):
             
             img_url = storage.child('img_'+str(a)).get_url(sto['downloadTokens'])
 
+            # improve this, lags realtime
             dt = datetime.now().strftime("%Y-%M-%D %H:%M:%S")
 
 
@@ -58,7 +61,8 @@ def image_request(request):
             data['img'] = img_url
 
 
-            vals = dfuc(img_object.image)
+            set_vals([i for i in dfuc(img_object.image)])
+
             data['c1'] = vals[0]
             data['c2'] = vals[1]
             data['c3'] = vals[2]
@@ -79,17 +83,21 @@ def image_request(request):
             messages.success(request, "File upload in Firebase Storage successful")
             uploaded = True
 
-            return render(
-                request, "image_form.html", {"form": form, "img_obj": img_object, "up":uploaded}
-            )
-    else:
-        form = UserImage()
+            # link to results page
+            return redirect('results')
+        else:
+        
+            messages.success(request,'Not a valid image file')
 
+    form = UserImage()
     return render(request, "image_form.html", {"form": form})
 
+def get_vals():
+    return vals
+
+def set_vals(v):
+    global vals
+    vals = v
+
 def results(request):
-    
     return render(request, "results.html")
-
-
-

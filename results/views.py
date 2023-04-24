@@ -7,12 +7,15 @@ rc('text', usetex=True)
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 import numpy as np
+import upload.views as uv
+
 # Bar Chart
 def barchart(request):
     objects = ['Both','Infection','Ischaemia','None']
     y_pos = np.arange(len(objects))
     # multiply prob by 100 to adjust to %age
-    c = [0.10,0.20,0.25,0.45]
+    # c = [0.10,0.20,0.25,0.45]
+    c = uv.get_vals()
     qty = [i*100 for i in c]
 
     plt.rcdefaults()

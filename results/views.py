@@ -15,17 +15,23 @@ def barchart(request):
     y_pos = np.arange(len(objects))
     # multiply prob by 100 to adjust to %age
     # c = [0.10,0.20,0.25,0.45]
-    c = uv.get_vals()
-    qty = [i*100 for i in c]
 
-    plt.rcdefaults()
-    fig, ax = plt.subplots()
-    ax.barh(y_pos, qty, align='center', color='#4285F4')
+    try:
 
-    ax.set_yticks(y_pos, labels=objects)
-    ax.invert_yaxis()  # labels read top-to-bottom
-    for i, v in enumerate(qty):
-        ax.text(v-v/2, i, str(v)+'%', color = 'white')
-    ax.set_title('Final Prediction')
-    plt.savefig('images/barchart.png')
-    return render(request,'bar_chart.html')
+        c = uv.get_vals()
+        qty = [i*100 for i in c]
+
+        plt.rcdefaults()
+        fig, ax = plt.subplots()
+        ax.barh(y_pos, qty, align='center', color='#4285F4')
+
+        ax.set_yticks(y_pos, labels=objects)
+        ax.invert_yaxis()  # labels read top-to-bottom
+        for i, v in enumerate(qty):
+            ax.text(v-v/2, i, str(v)+'%', color = 'white')
+        ax.set_title('Final Prediction')
+        plt.savefig('images/barchart.png')
+        return render(request,'bar_chart.html')
+
+    except:
+        return render(request, 'error.html')

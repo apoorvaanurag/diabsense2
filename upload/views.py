@@ -37,12 +37,13 @@ uploaded = False
 def image_request(request):
     if request.method == "POST":
         form = UserImage(request.POST, request.FILES)
+        form.save()
         img_object = form.instance
+        img_name = str(img_object.image.name)
         
-        if form.is_valid() and footValid(img_object.image):
+        if form.is_valid() and footValid(img_name):
 
             #removing since redundant copies in sqlite
-            # form.save()
             a = random.randint(0, 10000)
             #pushing image to cloud storage from local
             sto = storage.child('img_'+str(a)).put(img_object.image)
@@ -76,7 +77,6 @@ def image_request(request):
             img_object.image.close()
 
             #deleting image from local storage
-            img_name = str(img_object.image.name)
             delete = default_storage.delete(img_name)
 
             # close the file path
@@ -86,7 +86,7 @@ def image_request(request):
             # link to results page
             return redirect('results')
         else:
-        
+            delete = default_storage.delete(img_name)
             messages.success(request,'Not a valid image file')
 
     form = UserImage()

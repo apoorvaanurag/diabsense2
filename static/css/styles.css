@@ -1,0 +1,40 @@
+/* put open sans font in body */
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Header */
+
+.banner {
+    background-color: #213458;
+}
+
+.title{
+    color: white;
+}
+
+/* Instructions */
+
+/* make instructions class have a border of thickness 1 and center the div tag */
+.instructions {
+    border: 1px solid black;
+    text-align: center;
+}
+
+/* write css to make main-body have a border around it */
+.main-body {
+    border: 1px solid black !important;
+}
+
+.footer {
+    background-color: rgb(224, 224, 224);
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:60px;
+}
+
+.footer-text {
+    text-align: center;
+    padding-top: 20px;
+}

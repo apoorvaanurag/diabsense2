@@ -1,18 +1,72 @@
-{% extends 'base.html' %}  
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- load css file styles.css -->
+{%block styles%}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{%endblock styles%}
+
+
   
-{% block content %}  
-    <form method="post" enctype="multipart/form-data">  
-        {% csrf_token %}  
-        {{ form.as_p }}  
-        <button type="submit">Upload</button>  
-    </form>  
+{% block content %}
+     <!--create a div called main-body that has a border around it and some text inside make sure it is centered  -->
+    <div class="main">
+        <div class="container border border-4 border-dark rounded w-50 mt-5 p-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Instructions</h2>
+                    <ol>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quod deleniti quae!</li>
+                        <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur, dignissimos!</li>
+                        <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque saepe quisquam quos culpa doloribus molestiae?</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                    </ol>
+                    <form method="post" enctype="multipart/form-data" class = "d-flex justify-content-center mb-2">  
+                        {% csrf_token %}  
+                        {{ form.image }}
+                        <button type="submit" class="border border-2 border-primary rounded-end bg-primary text-white">
+                            Upload
+                        </button>                          
+                    </form>
+                </div>
+            </div>
+        </div>
+    
     
 
-
+    
+    
+    
     <!-- reset the web page on hitting refresh -->
     
     {% for message in messages %}
-        <p>{{ message }}</p>
+        <div id="toast" class="toast align-top text-center mx-auto mt-3 hide" style="width:fit-content; height:fit-content; background-color: rgb(255, 243, 205);" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+                <span id="toast-message"></span>
+            </div>
+        </div>
+        <script>
+            function showToast(message) {
+              // Set the message text
+              document.getElementById("toast-message").innerHTML = message;
+          
+              // Show the toast
+              const toast = document.getElementById("toast");
+              toast.classList.remove("hide");
+              toast.classList.add("show");
+          
+              // Hide the toast after 500ms
+              setTimeout(function(){
+                toast.classList.remove("show");
+                toast.classList.add("hide");
+              }, 5000);
+            }
+          </script>
+          <script>
+            showToast("{{ message }}");
+          </script>
     {% endfor %}
     <script>
         if ( window.history.replaceState ) {
@@ -20,6 +74,5 @@
         }
     </script>
     
-
-  
+ 
 {% endblock%}

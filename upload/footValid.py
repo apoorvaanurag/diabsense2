@@ -68,4 +68,4 @@ def footValid(img_name):
     print(f'other: {other[0]}')
     print(f'dfu: {dfu[0]}')
 
-    return dfu[0] > 0.4
+    return dfu[0] > 0.42

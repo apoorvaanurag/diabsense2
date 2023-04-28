@@ -3,16 +3,16 @@ import torchvision
 from torch.utils.data.dataloader import DataLoader
 from torchvision import datasets, models, transforms
 from PIL import Image
-from vit_pytorch import SimpleViT
+from vit_pytorch.t2t import T2TViT
 
-base_vit = SimpleViT(
+base_vit = T2TViT(
+    dim = 512,
     image_size = 224,
-    patch_size = 16,
+    depth = 5,
+    heads = 8,
+    mlp_dim = 512,
     num_classes = 2,
-    dim = 1024,
-    depth = 6,
-    heads = 14,
-    mlp_dim = 2048
+    t2t_layers = ((7, 4), (3, 2), (3, 2)) # tuples of the kernel size and stride of each consecutive layers of the initial token to token module
 )
 
 torch.manual_seed(42)

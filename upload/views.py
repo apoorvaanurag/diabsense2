@@ -80,7 +80,6 @@ def image_request(request):
             delete = default_storage.delete(img_name)
 
             # close the file path
-            messages.success(request, "File upload in Firebase Storage successful")
             uploaded = True
 
             # link to results page

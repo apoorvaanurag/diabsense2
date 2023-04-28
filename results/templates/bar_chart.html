@@ -1,11 +1,23 @@
 {% extends 'base.html'%}
-
+<!-- make styles.css work here -->
+{%load static%}
+{%block styles%}
+    <link rel="stylesheet" href="{%static 'css/styles.css'%}">
+{%endblock styles%}
 
 {%block content%}
 
+<center>
+    <div class="results">
+        <h2>Results</h2>
+        <p>Probability Chart</p>
+    </div>
+</center>
 
-<center><img src="../images/barchart.png" /></center>
+<div class="d-flex justify-content-center align-items-center">
+    <img src="../images/barchart.png" class="results_chart"/>
+</div>
 
-<canvas id="myChart" width="800" height="400"></canvas>
+
 
 {%endblock content%}

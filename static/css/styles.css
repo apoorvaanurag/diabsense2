@@ -1,6 +1,6 @@
 /* put open sans font in body */
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'League Spartan', sans-serif;
 }
 
 /* Header */
@@ -13,7 +13,16 @@ body {
     color: white;
 }
 
+.app-name {
+    color: white;
+}
+
+
 /* Instructions */
+
+.main{
+    margin-top: 10%;
+}
 
 /* make instructions class have a border of thickness 1 and center the div tag */
 .instructions {
@@ -26,6 +35,7 @@ body {
     border: 1px solid black !important;
 }
 
+/* Disclaimer */
 .footer {
     background-color: rgb(224, 224, 224);
     position:absolute;
@@ -38,3 +48,38 @@ body {
     text-align: center;
     padding-top: 20px;
 }
+
+
+/* Results Bar Chart */
+.results_chart{
+    width: 500px;
+    height: auto;
+}
+
+.results{
+    margin-top: 5%;
+}
+
+
+/* Responsive */
+    /* Home Page */
+@media only screen and (max-width: 800px) {
+    .app-name{
+        font-size: 35px;
+    }
+    .inst-box{
+        margin-top: 100px;
+        font-size: 15px;
+        width: 90%;
+    }
+    .w-50{
+        width: 90% !important;
+    }
+
+    .results_chart{
+        width: 98%;
+        height: auto;
+    }
+
+}
+

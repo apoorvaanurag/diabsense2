@@ -11,17 +11,17 @@
 {% block content %}
      <!--create a div called main-body that has a border around it and some text inside make sure it is centered  -->
     <div class="main">
-        <div class="container border border-4 border-dark rounded w-50 mt-5 p-2">
+        <div class="container border border-4 border-dark rounded w-50 p-2 inst-box">
             <div class="row">
                 <div class="col-md-12">
                     <h2>Instructions</h2>
                     <ol>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quod deleniti quae!</li>
-                        <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur, dignissimos!</li>
-                        <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</li>
-                        <li>Lorem ipsum dolor sit amet consectetur.</li>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque saepe quisquam quos culpa doloribus molestiae?</li>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                        <li>Keep the camera steady to avoid blur and shaky images.</li>
+                        <li>Wound should be in the center of image and focused.</li>
+                        <li>Picture should be taken under proper lighting.</li>
+                        <li>Hold the camera parallel to the foot.</li>
+                        <li>After the image is taken, click on the "Choose File" button and select it.</li>
+                        <li>Click on the "Upload" button to obtain the results.</li>
                     </ol>
                     <form method="post" enctype="multipart/form-data" class = "d-flex justify-content-center mb-2">  
                         {% csrf_token %}  
@@ -57,7 +57,7 @@
               toast.classList.remove("hide");
               toast.classList.add("show");
           
-              // Hide the toast after 500ms
+              // Hide the toast after 5000ms
               setTimeout(function(){
                 toast.classList.remove("show");
                 toast.classList.add("hide");

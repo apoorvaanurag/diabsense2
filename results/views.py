@@ -21,6 +21,9 @@ def barchart(request):
         c = uv.get_vals()
         qty = [i*100 for i in c]
 
+        # round to 2 decimal places
+        qty = [round(num, 2) for num in qty]
+
         plt.rcdefaults()
         fig, ax = plt.subplots()
         ax.barh(y_pos, qty, align='center', color='#4285F4')

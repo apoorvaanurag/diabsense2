@@ -35,6 +35,11 @@ class ImageDataset(torch.utils.data.Dataset):
     def __len__(self):
         return 1
 
+# Needed for PNG images
+class RemoveAlphaChannel(object):
+    def __call__(self, img):
+        return img[:3, :, :]
+
 # Test Section
 def dfuc(img_name):
     # concatenate img_name to the path
@@ -42,7 +47,8 @@ def dfuc(img_name):
 
     transform = transforms.Compose([
         transforms.Resize(224),
-        transforms.ToTensor()
+        transforms.ToTensor(),
+        RemoveAlphaChannel(),
     ])
 
     dataset = ImageDataset(img_path, transform=transform)
@@ -105,7 +111,7 @@ def dfuc(img_name):
                 # If the probabilities are close, then we can assume that the image is both
                 # Probability of both can be calculated by taking the average of the two probabilities
                 # and the probabilities of infection and ischaemia can be halved
-                if abs(infection_prob - ischaemia_prob) <= threshold:
+                if abs(infection_prob - ischaemia_prob) <= threshold and False:
                     both_prob = (infection_prob + ischaemia_prob) / 2
                     # Double down on the image being of type 'both'
                     # both_prob = 1

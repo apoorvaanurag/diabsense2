@@ -14,6 +14,7 @@ import random
 from .dfuc import dfuc
 from django.core.validators import validate_image_file_extension
 from .footValid import footValid
+from .slic_apply import slic_apply
 # declare vals variable to use in results\views.py
 
 config = {
@@ -42,6 +43,9 @@ def image_request(request):
         img_name = str(img_object.image.name)
         
         if form.is_valid() and footValid(img_name):
+
+            slic_apply(img_name)
+            # print(type(img_name)
 
             #removing since redundant copies in sqlite
             a = random.randint(0, 10000)

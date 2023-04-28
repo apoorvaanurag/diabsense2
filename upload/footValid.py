@@ -23,6 +23,11 @@ class ImageDataset(torch.utils.data.Dataset):
     def __len__(self):
         return 1
 
+# Needed for PNG images
+class RemoveAlphaChannel(object):
+    def __call__(self, img):
+        return img[:3, :, :]
+
 def footValid(img_name):
     # concatenate img_name to the path
     img_path = img_name
@@ -30,10 +35,12 @@ def footValid(img_name):
 
     transform = transforms.Compose([
         transforms.Resize(32),
-        transforms.ToTensor()
+        transforms.ToTensor(),
+        RemoveAlphaChannel(),
     ])
 
     dataset = ImageDataset(img_path, transform=transform)
+    print(dataset[0].shape)
     test_dl = DataLoader(dataset, batch_size=1, shuffle=False, num_workers=4, pin_memory=True)
 
     # MODEL 1
@@ -60,5 +67,5 @@ def footValid(img_name):
 
     print(f'other: {other[0]}')
     print(f'dfu: {dfu[0]}')
-    print(dfu[0] > other[0])
-    return dfu[0] > other[0]
+
+    return dfu[0] > 0.4

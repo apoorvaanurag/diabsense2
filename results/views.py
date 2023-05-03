@@ -8,6 +8,12 @@ matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 import numpy as np
 import upload.views as uv
+import logging
+logging.basicConfig(
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S')
+
 
 # Bar Chart
 def barchart(request):
@@ -17,7 +23,6 @@ def barchart(request):
     # c = [0.10,0.20,0.25,0.45]
 
     try:
-
         c = uv.get_vals()
         qty = [i*100 for i in c]
 
@@ -34,6 +39,9 @@ def barchart(request):
             ax.text(v-v/2, i, str(v)+'%', color = 'white')
         ax.set_title('Final Prediction')
         plt.savefig('images/barchart.png')
+
+        logging.info('Bar chart has been generated')
+
         return render(request,'bar_chart.html')
 
     except:

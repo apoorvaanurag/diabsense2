@@ -15,7 +15,12 @@ from .dfuc import dfuc
 from django.core.validators import validate_image_file_extension
 from .footValid import footValid
 from .slic_apply import slic_apply
-# declare vals variable to use in results\views.py
+from .convert_to_square_image import convert_to_square_image
+import logging
+logging.basicConfig(
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S')
 
 config = {
     "apiKey": "AIzaSyDC2DsvGtSfGsLyavQdvpW7oi4BfXtm2RY",
@@ -38,12 +43,18 @@ uploaded = False
 def image_request(request):
     if request.method == "POST":
         form = UserImage(request.POST, request.FILES)
+        logging.info('User has uploaded an image')
         form.save()
         img_object = form.instance
         img_name = str(img_object.image.name)
-        
-        if form.is_valid() and footValid(img_name):
 
+        if form.is_valid() and footValid(img_name):
+            logging.info('Image has been validated')
+
+            # convert to square image
+            convert_to_square_image(img_name)
+
+            # apply slic
             slic_apply(img_name)
             # print(type(img_name)
 
@@ -89,6 +100,7 @@ def image_request(request):
             # link to results page
             return redirect('results')
         else:
+            logging.info('Image has failed validation')
             delete = default_storage.delete(img_name)
             messages.success(request,'Not a valid image file')
 

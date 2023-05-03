@@ -4,6 +4,10 @@ body {
 }
 
 /* Header */
+.header img{
+    width: 10%;
+}
+
 
 .banner {
     background-color: #213458;
@@ -15,6 +19,7 @@ body {
 
 .app-name {
     color: white;
+    padding-top: 13px; 
 }
 
 
@@ -64,8 +69,14 @@ body {
 /* Responsive */
     /* Home Page */
 @media only screen and (max-width: 800px) {
+
+    .header img{
+        width: 20%;
+    }
+
     .app-name{
         font-size: 35px;
+        padding-top: 22px;
     }
     .inst-box{
         margin-top: 100px;

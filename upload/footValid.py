@@ -34,14 +34,14 @@ def footValid(img_name):
     # img_path = 'C:/Users/apoor/Desktop/dfu.jpg'
 
     transform = transforms.Compose([
-        transforms.Resize(32),
+        transforms.Resize((32,32)),
         transforms.ToTensor(),
         RemoveAlphaChannel(),
     ])
 
     dataset = ImageDataset(img_path, transform=transform)
     print(dataset[0].shape)
-    test_dl = DataLoader(dataset, batch_size=1, shuffle=False, num_workers=4, pin_memory=True)
+    test_dl = DataLoader(dataset, batch_size=1, shuffle=False, num_workers=1, pin_memory=True)
 
     # MODEL 1
     model = torch.jit.load("upload/validate.pt", map_location=torch.device('cpu')) # Load
@@ -68,4 +68,4 @@ def footValid(img_name):
     print(f'other: {other[0]}')
     print(f'dfu: {dfu[0]}')
 
-    return dfu[0] > 0.42
+    return dfu[0] > 0.40

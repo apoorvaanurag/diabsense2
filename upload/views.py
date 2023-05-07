@@ -22,15 +22,9 @@ logging.basicConfig(
     level=logging.INFO,
     datefmt='%Y-%m-%d %H:%M:%S')
 
-config = {
-    "apiKey": "AIzaSyDC2DsvGtSfGsLyavQdvpW7oi4BfXtm2RY",
-    "authDomain": "diabsense2.firebaseapp.com",
-    "databaseURL": "https://diabsense2-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "projectId": "diabsense2",
-    "storageBucket": "diabsense2.appspot.com",
-    "messagingSenderId": "611864714060",
-    "appId": "1:611864714060:web:88f7e6e0990b5c36304de9"
-}
+#pull config from .config and save it to config variable
+
+config = json.load(open('.config'))
 
 firebase = pyrebase.initialize_app(config)
 authe = firebase.auth()

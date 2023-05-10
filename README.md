@@ -8,6 +8,6 @@ The image recognition model comprises of two parts -
 ## How it works?
 DiabSense is built using the Django-framework.
   
-<img src="working/home_mobile.png" width="300">
+<img src="working/home_mobile.png" width="300"> <img src="working/results_mobile.png" width="300">
 
 

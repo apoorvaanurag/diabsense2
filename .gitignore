@@ -1,7 +1,5 @@
-db.sqlite3
-diabsense2.zip
+*.sqlite3
+*.zip
 .config
 staticfiles-cdn/
-upload/model1.pt
-upload/model2.pt
-upload/validate.pt
+upload/*.pt

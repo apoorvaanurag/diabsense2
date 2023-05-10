@@ -16,6 +16,4 @@ def slic_apply(img_name):
 
     io.imsave(img_name, segmented_image)
 
-# img_name = 'C:/Users/apoor/Desktop/dfu.jpg'
-# slic_apply(img_name)
 

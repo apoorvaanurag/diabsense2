@@ -32,10 +32,10 @@ db = firebase.database()
 storage = firebase.storage()
 
 data = {}
-uploaded = False
 
 def image_request(request):
     if request.method == "POST":
+        set_uploaded(False)
         form = UserImage(request.POST, request.FILES)
         logging.info('User has uploaded an image')
         form.save()
@@ -58,14 +58,10 @@ def image_request(request):
             sto = storage.child('img_'+str(a)).put(img_object.image)
 
             # getting probability values
-
-            
             img_url = storage.child('img_'+str(a)).get_url(sto['downloadTokens'])
 
             # improve this, lags realtime
             dt = datetime.now().strftime("%Y-%M-%D %H:%M:%S")
-
-
 
             # making dictionary of data
             data['img'] = img_url
@@ -88,8 +84,8 @@ def image_request(request):
             #deleting image from local storage
             delete = default_storage.delete(img_name)
 
-            # close the file path
-            uploaded = True
+            # uploaded = True
+            set_uploaded(True)
 
             # link to results page
             return redirect('results')
@@ -107,6 +103,14 @@ def get_vals():
 def set_vals(v):
     global vals
     vals = v
+
+def get_uploaded():
+    return uploaded
+
+def set_uploaded(u):
+    global uploaded
+    uploaded = u
+    logging.info('Upload set to: '+str(get_uploaded()))
 
 def results(request):
     return render(request, "results.html")

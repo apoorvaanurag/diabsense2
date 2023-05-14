@@ -3,3 +3,4 @@
 .config
 staticfiles-cdn/
 upload/*.pt
+.secretKey

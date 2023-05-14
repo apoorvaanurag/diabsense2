@@ -9,8 +9,13 @@ scikit-image==0.19.2
 scipy==1.10.1 ; python_version < '3.12' and python_version >= '3.8'
 tifffile==2023.4.12 ; python_version >= '3.8'
 django==4.1.7
-torch==2.0.0
-torchvision==0.15.1
+-f https://download.pytorch.org/whl/torch_stable.html 
+torch==2.0.0+cpu 
+-f https://download.pytorch.org/whl/torch_stable.html
+torchvision==0.15.1+cpu
+# torch==2.0.0
+# torchvision==0.15.1
+whitenoise==6.4.0
 vit_pytorch==1.2.0
 requests==2.30.0
 lxml==4.9.2

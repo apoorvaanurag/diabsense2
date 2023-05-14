@@ -13,7 +13,8 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)-8s %(message)s',
     level=logging.INFO,
     datefmt='%Y-%m-%d %H:%M:%S')
-
+from io import BytesIO
+import base64
 
 # Bar Chart
 def barchart(request):
@@ -23,6 +24,10 @@ def barchart(request):
     # c = [0.10,0.20,0.25,0.45]
 
     try:
+        logging.info(uv.get_uploaded())
+        if uv.get_uploaded() == False:
+            # throw exception
+            raise Exception
         c = uv.get_vals()
         qty = [i*100 for i in c]
 
@@ -38,11 +43,15 @@ def barchart(request):
         for i, v in enumerate(qty):
             ax.text(v-v/2, i, str(v)+'%', color = 'white')
         ax.set_title('Final Prediction')
-        plt.savefig('images/barchart.png')
+        img = BytesIO()
+        plt.savefig(img, format='png')
+        img.seek(0)
+        img_url = base64.b64encode(img.getvalue()).decode()
 
         logging.info('Bar chart has been generated')
+        uv.set_uploaded(False)
 
-        return render(request,'bar_chart.html')
+        return render(request,'bar_chart.html', {'img_url': img_url})
 
     except:
         return render(request, 'error.html')

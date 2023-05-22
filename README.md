@@ -11,3 +11,6 @@ DiabSense is built using the Django-framework. At the backend, the classificatio
 <img src="working/home_mobile.png" width="300"> <img src="working/results_mobile.png" width="300">
 
 
+## Collaborators
+* [apoorvaanurag](https://github.com/apoorvaanurag/)
+* [idkwhoiam322](https://github.com/idkwhoiam322/)

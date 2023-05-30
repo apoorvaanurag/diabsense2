@@ -8,11 +8,11 @@ matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 import numpy as np
 import upload.views as uv
-import logging
-logging.basicConfig(
-    format='%(asctime)s %(levelname)-8s %(message)s',
-    level=logging.INFO,
-    datefmt='%Y-%m-%d %H:%M:%S')
+# import logging
+# logging.basicConfig(
+#     format='%(asctime)s %(levelname)-8s %(message)s',
+#     level=logging.INFO,
+#     datefmt='%Y-%m-%d %H:%M:%S')
 from io import BytesIO
 import base64
 
@@ -24,7 +24,7 @@ def barchart(request):
     # c = [0.10,0.20,0.25,0.45]
 
     try:
-        logging.info(uv.get_uploaded())
+        # logging.info(uv.get_uploaded())
         if uv.get_uploaded() == False:
             # throw exception
             raise Exception

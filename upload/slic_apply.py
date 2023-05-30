@@ -17,3 +17,5 @@ def slic_apply(img_name):
     io.imsave(img_name, segmented_image)
 
 
+
+

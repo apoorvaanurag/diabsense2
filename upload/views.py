@@ -37,13 +37,13 @@ def image_request(request):
     if request.method == "POST":
         set_uploaded(False)
         form = UserImage(request.POST, request.FILES)
-        logging.info('User has uploaded an image')
+        # logging.info('User has uploaded an image')
         form.save()
         img_object = form.instance
         img_name = str(img_object.image.name)
 
-        if form.is_valid() and footValid(img_name):
-            logging.info('Image has been validated')
+        if form.is_valid():
+            # logging.info('Image has been validated')
 
             # convert to square image
             convert_to_square_image(img_name)
@@ -91,7 +91,7 @@ def image_request(request):
             return redirect('results')
         else:
             logging.info('Image has failed validation')
-            delete = default_storage.delete(img_name)
+            # delete = default_storage.delete(img_name)
             messages.success(request,'Not a valid image file')
 
     form = UserImage()
@@ -110,7 +110,7 @@ def get_uploaded():
 def set_uploaded(u):
     global uploaded
     uploaded = u
-    logging.info('Upload set to: '+str(get_uploaded()))
+    # logging.info('Upload set to: '+str(get_uploaded()))
 
 def results(request):
     return render(request, "results.html")

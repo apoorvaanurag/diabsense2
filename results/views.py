@@ -18,10 +18,9 @@ import base64
 
 # Bar Chart
 def barchart(request):
-    objects = ['Both','Infection','Ischaemia','None']
+    # removed Both for production purposes as requested by client
+    objects = ['Infection','Ischaemia','None']
     y_pos = np.arange(len(objects))
-    # multiply prob by 100 to adjust to %age
-    # c = [0.10,0.20,0.25,0.45]
 
     try:
         # logging.info(uv.get_uploaded())
@@ -29,6 +28,9 @@ def barchart(request):
             # throw exception
             raise Exception
         c = uv.get_vals()
+        c = c[1:] # remove first element
+
+        # multiply prob by 100 to adjust to %age
         qty = [i*100 for i in c]
 
         # round to 2 decimal places

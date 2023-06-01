@@ -10,6 +10,17 @@ DiabSense is built using the Django-framework. At the backend, the classificatio
   
 <img src="working/home_mobile.png" width="300"> <img src="working/results_mobile.png" width="300">
 
+## How to use 
+<!-- numbered list -->
+1. Clone the repository
+2. Run virtual environment `[Recommended]`
+3. Install the requirements from requirements.txt
+4. Setup your .config file. Refer to the .config.example file for reference
+5. Run the server using `python manage.py runserver`
+6. Open the link in your browser
+
+
+
 
 ## Collaborators
 * [apoorvaanurag](https://github.com/apoorvaanurag/)

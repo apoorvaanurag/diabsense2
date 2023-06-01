@@ -45,11 +45,6 @@ def image_request(request):
         if form.is_valid():
             # logging.info('Image has been validated')
 
-            # convert to square image
-            convert_to_square_image(img_name)
-
-            # apply slic
-            slic_apply(img_name)
             # print(type(img_name)
 
             #removing since redundant copies in sqlite
@@ -66,6 +61,12 @@ def image_request(request):
             # making dictionary of data
             data['img'] = img_url
 
+
+            # convert to square image
+            convert_to_square_image(img_name)
+
+            # apply slic
+            slic_apply(img_name)
 
             set_vals([i for i in dfuc(img_object.image)])
 
